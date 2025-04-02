@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <title>Par ou ímpar</title>
+</head>
+<body>
+
+   <h2>Par ou ímpar</h2>
+   <label for="n01">Número :</label>
+   <input type="number" id="n01"><br><br>
+
+
+   <button onclick="operar()">Checar</button>
+
+   <p id="resultado"></p>
+
+    <script>
+        function operar() {
+            let num = parseInt(document.getElementById('n01').value);
+
+            if (isNaN(num)) {
+                alert("Digite um número válido seu burro");
+                return;
+            }
+
+            let resultado = (num % 2 === 0) ? "O número é Par" : "O número é Ímpar";
+
+            document.getElementById('resultado').innerText = resultado;
+        }
+          
+    </script>
+
+</body>
+</html>
