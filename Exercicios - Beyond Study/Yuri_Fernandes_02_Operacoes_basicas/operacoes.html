@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operações Básicas</title>
+    <style>
+        body{
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        form{
+            width: 30%;
+            display: flex;
+            gap: 7px;
+            padding-bottom: 5px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid black;
+
+        }
+    </style>
+</head>
+<body>
+    <form action="">
+        <h3>Operações Básicas</h3>
+        
+        <label for="valor1">Primeiro Valor: </label>
+        <input type="number" name="valor1" id="valor1">
+
+        <label for="valor2">Segundo Valor: </label>
+        <input type="number" name="valor2" id="valor2">
+
+        <div class="checks">
+            <label for="soma">Soma</label>
+            <input type="checkbox" name="soma " id="soma">
+
+            <label for="subtracao">Subtração</label>
+            <input type="checkbox" name="subtracao" id="subtracao">
+
+            <label for="multiplicao">multiplição</label>
+            <input type="checkbox" name="multiplicao " id="multiplicao">
+        </div>
+
+        <input type="button" value="Calcular" class="btn_Calc">
+        
+        <div class="res"></div>
+    </form>
+
+    <script>
+        let btn_Calcular = document.querySelector(".btn_Calc");
+       
+        btn_Calcular.addEventListener("click", () => {
+
+            let valor1 = parseFloat(document.querySelector("#valor1").value);
+            let valor2 = parseFloat(document.querySelector("#valor2").value);
+            let res = document.querySelector(".res");
+        
+            let box1 = document.querySelector("#soma");
+            let box2 = document.querySelector("#subtracao");
+            let box3 = document.querySelector("#multiplicao");
+
+            let resultado;
+
+            if(isNaN(valor1) || isNaN(valor2)){
+                alert("animal, usa direito, digita os numero kkkkk");
+            };
+
+            if(box1.checked){
+            soma();
+            }else if(box2.checked){
+            subtracao();
+            }else if(box3.checked){
+            multiplicao();
+            }else{
+                alert("error, marque uma box monster! kkkkk");
+            };
+        
+            function soma(){
+            resultado = valor1 + valor2;
+            console.log(`error ${resultado}`)
+            res.innerHTML = `Resultado da operação: ${resultado}`;
+        };
+
+            function subtracao(){
+            resultado = valor1 - valor2;
+            res.innerHTML = `Resultado da operação: ${resultado}`;
+        };
+
+            function multiplicao(){
+            resultado = valor1 * valor2
+            res.innerHTML = `Resultado da operação: ${resultado}`;
+        };
+    
+        });
+       
+        
+    </script>
+</body>
+</html>
