@@ -6,10 +6,13 @@ function sortear(){
     let quantidade = parseInt(document.getElementById('quantidade').value);
     let de = parseInt(document.getElementById('de').value);
     let ate = parseInt(document.getElementById('ate').value);
-// concatenando strings com variaveis:
-alert(`Quantidades: ${quantidade}`);
-alert(`De: ${de}`);
-alert(`Até: ${ate}`);
+
+    let num = oberterNumeroAleatorio(de,ate);
+    alert(num);
 
     
+}
+
+function obterNumeroSorteado(min,max){
+
 }
