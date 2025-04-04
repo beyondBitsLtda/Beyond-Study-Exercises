@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <title>Primo ou não?</title>
+</head>
+<body>
+
+   <h2>Primo ou não?</h2>
+   <label for="n01">Número :</label>
+   <input type="number" id="n01"><br><br>
+
+
+   <button onclick="operar()">Checar</button>
+
+   <p id="resultado"></p>
+
+    <script>
+
+        function ehPrimo(num){
+            if (num < 2) return false;
+            if (num === 2 || num ===3) return true;
+            if (num % 2 ===0 || num % 3 === 0) return false;
+
+            let limite = Math. sqrt(num);
+            for (let i = 5; i <= limite; i +=6) {
+                if (num % i === 0 || num % (i+ 2) === 0) return false;
+            
+            }
+        
+        return true;
+         }
+        function operar() {
+            let num = parseInt(document.getElementById('n01').value);
+
+            if (isNaN(num)) {
+                alert("Digite um número válido seu burro");
+                return;
+            }
+
+            let resultado = ehPrimo(num) ? "O número é Primo" : "O número não é Primo";
+
+            document.getElementById('resultado').innerText = resultado;
+        }
+          
+    </script>
+
+</body>
+</html>
