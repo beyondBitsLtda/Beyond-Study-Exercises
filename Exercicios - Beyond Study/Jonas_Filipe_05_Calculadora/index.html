@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora</title>
+  <style>
+    body {
+      background: #1f1f1f;
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .calc {
+      background: #2b2b2b;
+      border-radius: 16px;
+      padding: 20px;
+      width: 320px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    }
+
+    .display {
+      background: #000;
+      color: #00ff99;
+      font-size: 32px;
+      padding: 15px;
+      text-align: right;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      overflow-x: auto;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    button {
+      padding: 20px;
+      font-size: 20px;
+      border: none;
+      border-radius: 10px;
+      background: #3a3a3a;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #505050;
+    }
+
+    .op { background: #035cd1; color: black; }
+    .eq { background: #89ee05; color: black; grid-column: span 2; }
+    .clr { background: #ff0000; color: black; grid-column: span 2; }
+  </style>
+</head>
+<body>
+
+  <div class="calc">
+    <div id="display" class="display">0</div>
+    <div class="buttons">
+      <button onclick="add('1')">1</button>
+      <button onclick="add('2')">2</button>
+      <button onclick="add('3')">3</button>
+      <button class="op" onclick="add('/')">÷</button>
+
+      <button onclick="add('4')">4</button>
+      <button onclick="add('5')">5</button>
+      <button onclick="add('6')">6</button>
+      <button class="op" onclick="add('*')">×</button>
+
+      <button onclick="add('7')">7</button>
+      <button onclick="add('8')">8</button>
+      <button onclick="add('9')">9</button>
+      <button class="op" onclick="add('-')">−</button>
+
+      <button onclick="add('0')">0</button>
+      <button onclick="add('.')">.</button>
+      <button class="op" onclick="add('+')">+</button>
+      <button class="eq" onclick="calcular()">=</button>
+      <button class="clr" onclick="limpar()">C</button>
+    </div>
+  </div>
+
+  <script>
+    const display = document.getElementById('display');
+  
+    function add(valor) {
+      if (display.textContent === '0') {
+        display.textContent = valor;
+      } else {
+        display.textContent += valor;
+      }
+    }
+  
+    function calcular() {
+      try {
+        display.textContent = eval(display.textContent);
+      } catch (e) {
+        display.textContent = "Erro";
+      }
+    }
+  
+    function limpar() {
+      display.textContent = '0';
+    }
+  
+    //  Teclado 
+    document.addEventListener('keydown', (e) => {
+      const tecla = e.key;
+  
+      // Números ou ponto
+      if (!isNaN(tecla) || tecla === '.') {
+        add(tecla);
+      }
+  
+      // Operadores
+      if (['+', '-', '*', '/'].includes(tecla)) {
+        add(tecla);
+      }
+  
+      // Enter 
+      if (tecla === 'Enter') {
+        calcular();
+      }
+  
+      // Backspace 
+      if (tecla === 'Backspace') {
+        const texto = display.textContent;
+        display.textContent = texto.length > 1 ? texto.slice(0, -1) : '0';
+      }
+  
+      // C
+      if (tecla === 'C') {
+        limpar();
+      }
+    });
+  </script>
+  
+</body>
+</html>
