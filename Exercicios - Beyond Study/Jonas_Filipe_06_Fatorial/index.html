@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>🔮 FATORIAL</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #4b0082, #0000ff, #ff004f);
+      background-size: 400% 400%;
+      animation: gradiente 10s ease infinite;
+      font-family: 'Orbitron', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    @keyframes gradiente {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(255, 0, 150, 0.6);
+      text-align: center;
+      color: #fff;
+      width: 350px;
+      backdrop-filter: blur(10px);
+    }
+
+    h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #fff;
+      text-shadow: 0 0 8px #00ffff;
+    }
+
+    label {
+      font-size: 18px;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    input {
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      width: 100%;
+      font-size: 16px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    button {
+      background: #ff004f;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #ff004f;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: #ff3366;
+      box-shadow: 0 0 15px #ff3366, 0 0 30px #ff3366;
+    }
+
+    #resultado {
+      margin-top: 25px;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      font-size: 18px;
+      color: #00ffea;
+      box-shadow: 0 0 12px #00ffea;
+      text-shadow: 0 0 8px #00ffff;
+      transition: all 0.3s;
+      word-break: break-word; /* quebra a linha quando o número é longo */
+      overflow-x: auto;        /* adiciona rolagem se necessário */
+      max-height: 200px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>🔮 FATORIAL</h2>
+    <label for="n01">Digite um número:</label>
+    <input type="number" id="n01" />
+    <button onclick="operar()">Checar</button>
+    <p id="resultado"></p>
+  </div>
+
+  <script>
+    function operar() {
+      // Pega o valor digitado no input e converte para número inteiro
+      const numero = parseInt(document.getElementById('n01').value);
+  
+      // Pega o parágrafo onde será exibido o resultado
+      const resultado = document.getElementById('resultado');
+  
+      // Verifica se o número é inválido (NaN) ou menor/igual a zero
+      if (isNaN(numero) || numero <= 0) {
+        resultado.innerText = "Digite um número inteiro maior que zero.";
+        return; // Sai da função se o número for inválido
+      }
+  
+      // Impede números muito grandes que podem travar o navegador
+      if (numero > 500) {
+        resultado.innerText = "Escolha um número menor ou igual a 500 para evitar lentidão.";
+        return;
+      }
+  
+      // Mostra mensagem de carregamento antes de iniciar o cálculo
+      resultado.innerText = "Calculando...";
+  
+      // Aguarda 100ms para permitir que o "Calculando..." apareça na tela
+      setTimeout(() => {
+        let fatorial = 1n; // Começa com 1n (BigInt) para suportar números grandes
+  
+        // Loop de 1 até o número digitado (usando BigInt)
+        for (let i = 1n; i <= BigInt(numero); i++) {
+          fatorial *= i; // Multiplica acumulando o valor do fatorial
+        }
+  
+        // Exibe o resultado formatado no parágrafo
+        resultado.innerText = `Fatorial de ${numero} é:\n${fatorial.toString()}`;
+      }, 100); // Espera 100 milissegundos antes de calcular
+    }
+  </script>
+  
+  
+
+</body>
+</html>
