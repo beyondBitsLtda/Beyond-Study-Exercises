@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <title>Contagem Regressiva</title>
+    <title>Lista de Compras</title>
 </head>
 
 <body>
@@ -16,18 +16,19 @@
         <div class="container__conteudo">
             <div class="container__informacoes">
                 <div class="container__texto">
-                    <h1>Escolha<span class="container__texto-azul">um número</span></h1>
+                    <h1>Escolha<span class="container__texto-azul">oque vai comprar</span></h1>
 
                                       
                     <div class="container__campo">
-                        <label class="texto__paragrafo">Número</label>
-                        <input class="container__input" id="n01" type="number" min="1">
+                        <label class="texto__paragrafo">Item</label>
+                        <input class="container__input" id="lista">
                     </div>
                     
                 </div>
                 
                 <div class="chute container__botoes">
-                    <button onclick="operar()" id="btn-sortear" class="container__botao">Contar</button>
+                    <button onclick="adicionar(event)" id="add" class="container__botao">Adicionar</button>
+                    <button onclick="adicionar(event)" id="remove" class="container__botao">Remover</button>
                 </div>
 
                 
