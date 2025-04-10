@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fatorial</title>
+    <style>
+         *{
+            margin: 0;
+            padding: 0;
+         }
+         
+         body{
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 12pt;
+            background-color: black;
+        }
+        
+        form{
+            width: 20%;
+            display: flex;
+            gap: 7px;
+            padding: 10px;
+            padding-bottom: 5px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            color:black;
+            box-shadow: 0.5px 0.5px 15px white;
+            border-radius: 10px;
+        }
+    </style>
+
+</head>
+<body>
+    <form action="">
+        <h3>Fatorial</h3>
+        
+        <label>Digite um número e veja seu fatorial!</label>
+        
+        <label for="numero"><strong>Digite um número:</strong></label>
+        <input type="number" name="numero" id="numero">
+
+        <input type="button" value="Verificar" class="btn_verif" onclick="fatorialCalc()">
+
+        <div class="res"></div>
+    </form>
+
+    <script>
+        function fatorialCalc(){
+            
+            let numero = parseInt(document.querySelector("#numero").value);
+            let resultado = document.querySelector(".res");
+            let fatorial = 1;
+
+            if(isNaN(numero)){
+                alert("Digite o valor!");
+            }
+
+            for(let i = numero; i >= 1; i--){
+                fatorial *= i;
+                console.log(i);
+            };
+            resultado.textContent = `O Fatorial do número !${numero} é ${fatorial}.`;
+        };
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manipulando ELementos</title>
+    <style>
+          *{
+            margin: 0;
+            padding: 0;
+         }
+         
+         body{
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 12pt;
+            background-color: black;
+        }
+        
+        form{
+            width: 15%;
+            display: flex;
+            gap: 7px;
+            padding: 10px;
+            padding-bottom: 5px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            color:black;
+            box-shadow: 0.5px 0.5px 15px white;
+            border-radius: 10px;
+        }
+
+        .btnAdd{
+            margin-right: 10px;
+            padding: 3px;
+        }
+
+        .btnRemove{
+            padding: 3px;
+        }
+    </style>
+</head>
+<body>
+    <form action="">
+        <h3>Manipulando Elementos</h3>
+        
+        <label>Faça seu pedido!</label>
+        
+        <label for="text"><strong>Digite o nome do item</strong></label>
+        <input type="text" name="txt" id="txt">
+        
+        <div class="res"></div>
+
+        <div>
+            <input type="button" value="Adicionar" class ="btnAdd">
+            <input type="button" value="Remover" class ="btnRemove">
+        </div>    
+        
+    </form>
+
+
+    <script>
+        let btn_Add = document.querySelector(".btnAdd");
+        let btn_Remove = document.querySelector(".btnRemove");
+        
+        let listaPedido = [];
+        let resultado = document.querySelector(".res");
+
+        btn_Add.addEventListener("click", () => {
+            function adicionarItens(){
+                
+                let inputTxt = document.querySelector("#txt");
+                
+                if(inputTxt.value){
+                    listaPedido.push(inputTxt.value);
+                    resultado.innerHTML = `
+                        <h4>Seu Pedido</h4>
+                        <ol type="1">${listaPedido.map(item => `<li>${item}</li>`).join("")}</ol>
+                    `;
+
+                    inputTxt.value = "";
+                };
+                
+                console.log("end Add");
+            };
+            adicionarItens();
+        });
+
+        btn_Remove.addEventListener("click", ()=>{
+            function removerItens(){
+                
+                let inputTxt = document.querySelector("#txt");
+                
+                if(listaPedido.length > 0){
+                    listaPedido.pop();
+                    resultado.innerHTML = `
+                        <h4>Seu Pedido</h4>
+                        <ol type="1">${listaPedido.map(item => `<li>${item}</li>`).join("")}</ol>
+                    `;
+                };
+                console.log("end Remove");
+            };
+            removerItens();
+        });
+    </script>
+</body>
+</html>
