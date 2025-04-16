@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Pedidos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            padding: 30px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 250px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            border: none;
+            background-color: #3498db;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        #resultado {
+            margin-top: 30px;
+            text-align: left;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        ol {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        li button {
+            background-color: #e67e22;
+            margin-left: 10px;
+        }
+
+        li button:hover {
+            background-color: #d35400;
+        }
+
+        #clear {
+            background-color: #e74c3c;
+        }
+
+        #clear:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <h2>📝 Lista de Pedidos</h2>
+    <input type="text" id="txt" placeholder="Digite seu pedido">
+    <button id="add">Adicionar</button>
+    <button id="remove">Remover Último</button>
+    <button id="clear">Limpar Tudo</button>
+
+    <div id="resultado"></div>
+
+    <script>
+        const btnAdd = document.getElementById("add");
+        const btnRemove = document.getElementById("remove");
+        const btnClear = document.getElementById("clear");
+        const input = document.getElementById("txt");
+        const resultado = document.getElementById("resultado");
+
+        let lista = [];
+
+        // Carrega lista salva
+        if (localStorage.getItem("pedidos")) {
+            lista = JSON.parse(localStorage.getItem("pedidos"));
+            atualizarLista();
+        }
+
+        function atualizarLista() {
+            localStorage.setItem("pedidos", JSON.stringify(lista));
+            if (lista.length === 0) {
+                resultado.innerHTML = "<p>Nenhum pedido adicionado ainda.</p>";
+                return;
+            }
+
+            resultado.innerHTML = `
+                <h4>Seu Pedido</h4>
+                <ol>
+                    ${lista.map((item, index) => `
+                        <li>
+                            ${item}
+                            <button onclick="editarItem(${index})">Editar</button>
+                        </li>
+                    `).join("")}
+                </ol>
+            `;
+        }
+
+        btnAdd.addEventListener("click", () => {
+            if (input.value.trim()) {
+                lista.push(input.value.trim());
+                input.value = "";
+                atualizarLista();
+            }
+        });
+
+        btnRemove.addEventListener("click", () => {
+            lista.pop();
+            atualizarLista();
+        });
+
+        btnClear.addEventListener("click", () => {
+            if (confirm("Tem certeza que deseja limpar todos os pedidos?")) {
+                lista = [];
+                localStorage.removeItem("pedidos");
+                atualizarLista();
+            }
+        });
+
+        function editarItem(index) {
+            let novoTexto = prompt("Editar pedido:", lista[index]);
+            if (novoTexto !== null && novoTexto.trim()) {
+                lista[index] = novoTexto.trim();
+                atualizarLista();
+            }
+        }
+
+        window.editarItem = editarItem;
+    </script>
+</body>
+</html>
