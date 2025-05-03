@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h2>Crescente</h2>
+    <label for="num">Números (separados por vírgula):</label>
+    <input type="text" id="n01"><br><br>
+    <button onclick="ordenarNumeros()">Ordenar</button>
+    <p id="resultado"></p>
+
+    <script>
+        function ordenarNumeros() {
+            const input = document.getElementById("n01").value;
+            const numeros = input.split(",").map(Number); // Converte texto em array de números
+
+            // Validação
+            if (numeros.some(isNaN)) {
+                alert("Digite apenas números separados por vírgula!");
+                return;
+            }
+
+            // Ordena e exibe
+            numeros.sort((a, b) => a - b);
+            document.getElementById("resultado").textContent = 
+                "Contagem crescente: " + numeros.join(", ");
+        }
+    </script>
+</body>
+</html>
