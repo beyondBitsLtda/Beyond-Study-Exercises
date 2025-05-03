@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Conversor de Temperatura</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .converter {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        input, select, button {
+            padding: 8px;
+            margin: 5px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e9e9e9;
+            border-radius: 4px;
+        }
+    </style>
+    </head>
+    <body>
+    <div class="converter">
+     <h2>Conversor de Temperatura</h2>
+        
+     <label for="temperature">Valor:</label>
+     <input type="number" id="temperature" placeholder="Digite a temperatura">
+        
+     <label for="conversionType">Converter de:</label>
+     <select id="conversionType">
+     <option value="cToF">Celsius para Fahrenheit</option>
+     <option value="fToC">Fahrenheit para Celsius</option>
+     </select>
+        
+     <button onclick="convertTemperature()">Converter</button>
+        
+     <div id="result" class="result">
+            Resultado aparecerá aqui
+     </div>
+     </div>
+
+     <script>
+
+            //Define uma função que será executada quando o usuário clicar no botão de conversão;
+            function convertTemperature() {
+            // inputTemp (Obtém o valor digitado no campo de temperatura e converte para número decimal usando ParseFloat)
+            const inputTemp = parseFloat(document.getElementById("temperature").value);
+            // conversionType (Obtém o tipo de conversão selecionado no menu suspenso/pode ser "cToF" ou "fToC")
+            const conversionType = document.getElementById("conversionType").value;
+            // resultElement (Obtém referência ao elemento HTML onde será exibido o resultado)
+            const resultElement = document.getElementById("result");
+            
+            // if (isNaN(inputTemp)Verifica se o valor digitado não é um número
+            if (isNaN(inputTemp)) {
+            //Se for inválido, mostra a mensagem de erro com a função return
+            resultElement.textContent = "Por favor, insira um número válido!";
+            return;
+            }
+            // convertedTemp (Armazena o resultado da conversão)
+            let convertedTemp;
+            // conversionText(Armazena o texto formatado do resultado)
+            let conversionText;
+            
+            // Aplica a fórmula: F =(C X9/5)+32/Formata o resultado com 1 casa decimal usando toFixed(1)/Cria string no formato "XX°C = YY°F
+            if (conversionType === "cToF") {
+            // Celsius para Fahrenheit: F = (C × 9/5) + 32
+            convertedTemp = (inputTemp * 9/5) + 32;
+            conversionText = `${inputTemp}°C = ${convertedTemp.toFixed(1)}°F`;
+            } else {
+            // Aplica a fórmula: C =(F-32) X 5/9;Formata o resultado com 1 casa decimal;Cria string no formato "XX°F = YY°C"
+            convertedTemp = (inputTemp - 32) * 5/9;
+            conversionText = `${inputTemp}°F = ${convertedTemp.toFixed(1)}°C`;
+            }
+            
+            // Exibir o resultado
+            resultElement.textContent = conversionText;
+        }
+    </script>
+</body>
+</html>
