@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Validador de CPF</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .validator {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        input, button {
+            padding: 8px;
+            margin: 5px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .valid {
+            background-color: #dff0d8;
+            color: #3c763d;
+        }
+        .invalid {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+    </style>
+</head>
+<body>
+    <div class="validator">
+        <h2>Validador de CPF</h2>
+        
+        <label for="cpfInput">Digite o CPF (apenas números):</label>
+        <input type="text" id="cpfInput" placeholder="Ex: 12345678909" maxlength="11">
+        
+        <button onclick="validarCPF()">Validar</button>
+        
+        <div id="result" class="result">
+            Digite um CPF e clique em Validar
+        </div>
+    </div>
+
+<script>
+    function validarCPF() {
+    //cpf obtém o valor digitado no campo de entrada com ID "cpfInput"
+    const cpf = document.getElementById("cpfInput").value;
+    //resultElement refere-se ao html onde será exibido o resultado
+    const resultElement = document.getElementById("result");
+    //\D é uma expressão regular que corresponde a qualquer caractere que NÃO seja um dígito equivalente a 0-9
+    //.replace(/\D/g, '') substitui todos os caracteres não numéricos por sring vaiza (remove formatação como pontos e traço)
+    //Exemplo 134.546.879.90
+    const cpfNumerico = cpf.replace(/\D/g, '');
+    //verifica se o cpf limpo tem 11 caractéres
+    if (cpfNumerico.length === 11){
+    //atualiza o texto do elemento de resultado para mensagem de sucesso / aplica no css "valid" que estiliza o resultado como válido
+        resultElement.textContent = "CPF válido (11 dígitos númericos)";
+        resultElement.className = "result valid";
+    //atualiza o texto do elemento de resultado para mensagem de erro / estiliza o resultado como inválido
+    } else {
+        resultElement.textContent = "CPF inválido! Deve conter exatamente 11 dígitos numéricos.";
+        resultElement.className = "result invalid";
+
+    }
+    }
+    </script>
+    </body>
+    </html>
