@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        <h3>Conversor de Temperatura</h3>
+        <p>Digite a temperatura em Celsius</p>
+        <input type="text" name="temperatura" id="temperatura">
+        <br> 
+        <input type="button" value="Converter" id="btnConverter">
+        <div class="res"></div>
+    </form>
+
+    <script>
+        let temperatura = document.querySelector("#temperatura");
+        let btnConverter = document.querySelector("#btnConverter");
+        let resultado = document.querySelector(".res");
+
+        btnConverter.addEventListener("click", () => {
+            
+            function converter(){
+                let tempCel = parseFloat(temperatura.value);
+                let resultado = document.querySelector(".res");
+
+                let mult = 1.8;
+                let sum = 32;
+                let fah = (temperatura.value * mult) + sum;
+
+                resultado.innerHTML = `A temperatura convertida em Fahrenheit é: ${fah}`
+            };
+
+            converter();
+        });
+    </script>
+</body>
+</html>
