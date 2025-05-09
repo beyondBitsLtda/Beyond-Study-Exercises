@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validando cpf</title>
+</head>
+<body>
+    <form action="">
+        <h3>Validando CPF</h3>
+        <p>Digite abaixo o CPF que deseja validar:</p>
+        <input type="text" name="cpf" id="cpf">
+        <br> 
+        <input type="button" value="Validar" id="btnValidar">
+        <div class="res"></div>
+    </form>
+
+    <script>
+        let resultado = document.querySelector(".res");
+        function validarCPF() {
+            let cpf = document.querySelector('#cpf').value.replace(/\D/g, "");
+            let resultado = document.querySelector(".res");
+
+            if (cpf.length !== 11) {
+                resultado.innerHTML = " CPF inválido! Deve conter 11 dígitos.";
+                return;
+            };
+
+            
+            if (/^(\d)\1+$/.test(cpf)) {
+                resultado.innerHTML = " CPF inválido! Números repetidos não são válidos.";
+                return;
+            };
+
+            
+            let soma = 0;
+            for (let i = 0; i < 9; i++) {
+                soma += cpf[i] * (10 - i);
+            };
+            
+            let primeiroDigito = (soma * 10) % 11;
+            primeiroDigito = (primeiroDigito === 10) ? 0 : primeiroDigito;
+
+            soma = 0;
+            for (let i = 0; i < 10; i++) {
+                soma += cpf[i] * (11 - i);
+            };
+
+            let segundoDigito = (soma * 10) % 11;
+            segundoDigito = (segundoDigito === 10) ? 0 : segundoDigito;
+
+            if (cpf[9] == primeiroDigito && cpf[10] == segundoDigito) {
+                resultado.innerHTML = "CPF válido!";
+            } else {
+                resultado.innerHTML = "CPF inválido!";
+            };
+};
+
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelector("#btnValidar").addEventListener("click", validarCPF);
+});
+
+        btnValidar.addEventListener("click", () => {
+            validarCPF();
+        });
+    </script>
+</body>
+</html>
