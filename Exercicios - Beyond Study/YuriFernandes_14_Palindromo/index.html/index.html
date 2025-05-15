@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palindromo</title>
+</head>
+<body>
+    <form action="">
+        <h3>Verficador Palimetro</h3>
+        <p>Digite abaixo a palavra:</p>
+        
+        <input type="text" name="notas" id="campo" placeholder="Palavra">
+        
+        <br> 
+        <input type="button" value="Verificar" id="btnVerificar">
+        <div class="res"></div>
+    </form>
+
+    <script>
+        let btnVerificar = document.querySelector("#btnVerificar");
+
+function verificarPalavra() {
+    let palavra = document.querySelector("#campo").value;
+
+    if (palavra) {
+        palavra = palavra.toLowerCase().replace(/\s/g, "");
+        let palavraReverso = palavra.split("").reverse().join("");
+        if (palavra === palavraReverso) {
+            alert(`"${palavra}" é um palíndromo!`);
+        } else {
+            alert(`"${palavra}" não é um palíndromo.`);
+        }
+        } else {
+            lert("Nenhuma palavra foi inserida!");
+        }
+    
+};
+    btnVerificar.addEventListener("click", verificarPalavra);
+
+    </script>
+</body>
+</html>
